@@ -27,14 +27,9 @@ The project structure is organized as follows:
 To run the application locally:
 
 1. Ensure you have Java installed on your machine.
-2. Compile the Java files in the `src/main/java` directory.
+2. Compile the Java files in the `src/main/java/movielisting` directory.
 3. Run the `MovieListingApp` class to start the application.
 
 ```bash
 $ javac src/main/java/movielisting/*.java
 $ java -cp src/main/java movielisting.MovieListingApp
-
-  
-## Contributing
-
-Contributions to this project are welcome. You can contribute by opening issues for bug reports or feature requests, or by submitting pull requests with improvements.
