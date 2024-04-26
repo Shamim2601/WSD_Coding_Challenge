@@ -52,8 +52,7 @@ public class MovieListingApp {
             break;
           case 3:
             System.out.println("Exiting the application.");
-            app.logoutUser();
-            break;
+            return;
           default:
             System.out.println("Invalid choice. Please try again.");
         }
@@ -147,9 +146,9 @@ public class MovieListingApp {
   public void registerUser(String email) {
     User user = new User(email);
     users.add(user);
-}
+  }
 
-public void loginUser(String email) {
+  public void loginUser(String email) {
     for (User user : users) {
         if (user.getEmail().equals(email)) {
             currentUser = user;
@@ -157,9 +156,71 @@ public void loginUser(String email) {
         }
     }
     System.out.println("User not found. Please register.");
-}
+  }
 
-public void logoutUser() {
+  public void logoutUser() {
     currentUser = null;
-}
+  }
+
+  public List<Movie> searchMoviesByTitle(String title) {
+    List<Movie> result = new ArrayList<>();
+    for (Movie movie : movies) {
+        if (movie.getTitle().toLowerCase().contains(title.toLowerCase())) {
+            result.add(movie);
+        }
+    }
+    return result;
+  }
+
+  public List<Movie> searchMoviesByCast(String cast) {
+    List<Movie> result = new ArrayList<>();
+    for (Movie movie : movies) {
+        if (movie.getCast().toLowerCase().contains(cast.toLowerCase())) {
+            result.add(movie);
+        }
+    }
+    return result;
+  }
+
+  public List<Movie> searchMoviesByCategory(String category) {
+    List<Movie> result = new ArrayList<>();
+    for (Movie movie : movies) {
+        if (movie.getCategory().toLowerCase().contains(category.toLowerCase())) {
+            result.add(movie);
+        }
+    }
+    return result;
+  }
+
+  public void addToFavorites(User user, Movie movie) {
+    user.addFavorite(movie);
+  }
+
+  public void removeFromFavorites(User user, Movie movie) {
+    user.removeFavorite(movie);
+  }
+
+  public void viewUserProfile(User user) {
+    System.out.println(user);
+    System.out.println("Favorites:");
+    for (Movie movie : user.getFavorites()) {
+        System.out.println(movie);
+    }
+  }
+
+  public void searchFavorites(User user, String keyword) {
+    List<Movie> favorites = user.getFavorites();
+    List<Movie> result = new ArrayList<>();
+    for (Movie movie : favorites) {
+        if (movie.getTitle().toLowerCase().contains(keyword.toLowerCase()) ||
+            movie.getCast().toLowerCase().contains(keyword.toLowerCase()) ||
+            movie.getCategory().toLowerCase().contains(keyword.toLowerCase())) {
+            result.add(movie);
+        }
+    }
+    System.out.println("Search result in favorites for '" + keyword + "':");
+    for (Movie movie : result) {
+        System.out.println(movie);
+    }
+  }
 }
