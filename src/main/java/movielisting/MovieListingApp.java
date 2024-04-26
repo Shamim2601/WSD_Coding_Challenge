@@ -52,7 +52,8 @@ public class MovieListingApp {
             break;
           case 3:
             System.out.println("Exiting the application.");
-            return;
+            app.logoutUser();
+            break;
           default:
             System.out.println("Invalid choice. Please try again.");
         }
