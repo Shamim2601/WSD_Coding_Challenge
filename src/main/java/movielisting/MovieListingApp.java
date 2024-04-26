@@ -57,6 +57,85 @@ public class MovieListingApp {
           default:
             System.out.println("Invalid choice. Please try again.");
         }
+      }else {
+        System.out.println("\n===== Movie Listing App =====");
+        System.out.println("1. Search Movies");
+        System.out.println("2. Add Movie to Favorites");
+        System.out.println("3. Remove Movie from Favorites");
+        System.out.println("4. View User Profile");
+        System.out.println("5. Search Favorites");
+        System.out.println("6. Logout");
+        System.out.println("7. Exit");
+        System.out.print("Enter your choice: ");
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        switch (choice) {
+            case 1:
+                System.out.print("Enter search keyword: ");
+                String keyword = scanner.nextLine();
+                List<Movie> searchResult = app.searchMoviesByTitle(keyword);
+                searchResult.addAll(app.searchMoviesByCast(keyword));
+                searchResult.addAll(app.searchMoviesByCategory(keyword));
+                if (searchResult.isEmpty()) {
+                    System.out.println("No movies found for the given keyword.");
+                } else {
+                    System.out.println("Search result:");
+                    for (Movie movie : searchResult) {
+                        System.out.println(movie);
+                    }
+                }
+                break;
+            case 2:
+                System.out.print("Enter movie title to add to favorites: ");
+                String titleToAdd = scanner.nextLine();
+                List<Movie> moviesToAdd = app.searchMoviesByTitle(titleToAdd);
+                if (moviesToAdd.isEmpty()) {
+                    System.out.println("Movie not found.");
+                } else {
+                    System.out.println("Select a movie to add to favorites:");
+                    for (int i = 0; i < moviesToAdd.size(); i++) {
+                        System.out.println((i + 1) + ". " + moviesToAdd.get(i).getTitle());
+                    }
+                    System.out.print("Enter choice: ");
+                    int movieChoice = scanner.nextInt();
+                    app.addToFavorites(app.currentUser, moviesToAdd.get(movieChoice - 1));
+                    System.out.println("Movie added to favorites.");
+                }
+                break;
+            case 3:
+                User user = app.currentUser;
+                if (user.getFavorites().isEmpty()) {
+                    System.out.println("No movies in favorites to remove.");
+                } else {
+                    System.out.println("Favorites:");
+                    for (int i = 0; i < user.getFavorites().size(); i++) {
+                        System.out.println((i + 1) + ". " + user.getFavorites().get(i).getTitle());
+                    }
+                    System.out.print("Enter index of movie to remove from favorites: ");
+                    int indexToRemove = scanner.nextInt();
+                    app.removeFromFavorites(user, user.getFavorites().get(indexToRemove - 1));
+                    System.out.println("Movie removed from favorites.");
+                }
+                break;
+            case 4:
+                app.viewUserProfile(app.currentUser);
+                break;
+            case 5:
+                System.out.print("Enter search keyword for favorites: ");
+                String keywordForFavorites = scanner.nextLine();
+                app.searchFavorites(app.currentUser, keywordForFavorites);
+                break;
+            case 6:
+                app.logoutUser();
+                System.out.println("Logged out successfully.");
+                break;
+            case 7:
+                System.out.println("Exiting the application.");
+                return;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+        }
       }
     }
   }
