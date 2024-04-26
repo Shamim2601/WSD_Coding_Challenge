@@ -17,10 +17,6 @@ Users can register with their email addresses, search for movies, view movie det
 
 - No database is used in this implementation.
 
-## Project Structure
-
-The project structure is organized as follows:
-
 
 ## Running Locally
 
