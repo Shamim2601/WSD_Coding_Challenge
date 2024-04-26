@@ -18,10 +18,20 @@ public class MovieListingApp {
   public static void main(String[] args) {
     MovieListingApp app = new MovieListingApp();
 
-    // Sample movies
+    // Sample movies added to the console app
     app.addMovie(new Movie("Inception", "Leonardo DiCaprio, Joseph Gordon-Levitt", "Action", "2010", 160000000));
     app.addMovie(new Movie("The Shawshank Redemption", "Tim Robbins, Morgan Freeman", "Drama", "1994", 25000000));
     app.addMovie(new Movie("The Dark Knight", "Christian Bale, Heath Ledger", "Action", "2008", 185000000));
+    app.addMovie(new Movie("Pulp Fiction", "John Travolta, Uma Thurman", "Crime", "1994", 8000000));
+    app.addMovie(new Movie("Forrest Gump", "Tom Hanks, Robin Wright", "Drama", "1994", 55000000));
+    app.addMovie(new Movie("The Matrix", "Keanu Reeves, Laurence Fishburne", "Action", "1999", 63000000));
+    app.addMovie(new Movie("Fight Club", "Brad Pitt, Edward Norton", "Drama", "1999", 63000000));
+    app.addMovie(new Movie("The Lord of the Rings: The Fellowship of the Ring", "Elijah Wood, Ian McKellen", "Fantasy", "2001", 93000000));
+    app.addMovie(new Movie("Gladiator", "Russell Crowe, Joaquin Phoenix", "Action", "2000", 103000000));
+    app.addMovie(new Movie("The Godfather", "Marlon Brando, Al Pacino", "Crime", "1972", 6000000));
+    app.addMovie(new Movie("The Godfather: Part II", "Al Pacino, Robert De Niro", "Crime", "1974", 13000000));
+    app.addMovie(new Movie("The Shawshank Redemption", "Tim Robbins, Morgan Freeman", "Drama", "1994", 25000000));
+    app.addMovie(new Movie("Inglourious Basterds", "Brad Pitt, Christoph Waltz", "Drama", "2009", 70000000));
 
     Scanner scanner = new Scanner(System.in);
 
@@ -33,7 +43,7 @@ public class MovieListingApp {
         System.out.println("3. Exit");
         System.out.print("Enter your choice: ");
         int choice = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine();
 
         switch (choice) {
           case 1:
@@ -52,6 +62,7 @@ public class MovieListingApp {
             break;
           case 3:
             System.out.println("Exiting the application.");
+            scanner.close();  // this is the final exit point, so scanner closed here
             return;
           default:
             System.out.println("Invalid choice. Please try again.");
@@ -67,7 +78,7 @@ public class MovieListingApp {
         System.out.println("7. Exit");
         System.out.print("Enter your choice: ");
         int choice = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine();
 
         switch (choice) {
             case 1:
@@ -138,6 +149,10 @@ public class MovieListingApp {
       }
     }
   }
+
+
+
+  ///////////////////  Methods Implementation here  ///////////////////////////
 
   public void addMovie(Movie movie) {
     movies.add(movie);
